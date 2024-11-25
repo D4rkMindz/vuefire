@@ -1,37 +1,37 @@
 import type {
-  Query,
-  DocumentReference,
   CollectionReference,
-  FirestoreError,
   DocumentData,
+  DocumentReference,
   FirestoreDataConverter,
+  FirestoreError,
+  Query,
 } from 'firebase/firestore'
 import {
+  getCurrentInstance,
+  getCurrentScope,
+  isRef,
   MaybeRefOrGetter,
-  toValue,
+  onScopeDispose,
+  onServerPrefetch,
   ref,
   shallowRef,
   ShallowRef,
-  getCurrentScope,
-  isRef,
+  toValue,
   watch,
-  getCurrentInstance,
-  onServerPrefetch,
-  onScopeDispose,
 } from 'vue-demi'
 import { useFirebaseApp } from '../app'
 import {
   _Nullable,
-  UnbindWithReset,
-  noop,
-  checkWrittenTarget,
-  useIsSSR,
-  isDocumentRef,
-  ResetOption,
-  OperationsType,
-  walkSet,
   _RefWithState,
   _Simplify,
+  checkWrittenTarget,
+  isDocumentRef,
+  noop,
+  OperationsType,
+  ResetOption,
+  UnbindWithReset,
+  useIsSSR,
+  walkSet,
 } from '../shared'
 import { getInitialValue } from '../ssr/initialState'
 import { addPendingPromise } from '../ssr/plugin'
@@ -40,7 +40,6 @@ import {
   bindDocument,
   firestoreOptionsDefaults,
   FirestoreRefOptions,
-  _FirestoreRefOptionsWithDefaults,
 } from './bind'
 
 export interface _UseFirestoreRefOptions<TData = unknown>
@@ -59,11 +58,15 @@ const NO_INITIAL_VALUE = Symbol()
  * @internal
  */
 export function _useFirestoreRef(
-  docOrCollectionRef: MaybeRefOrGetter<
-    _Nullable<
-      DocumentReference<unknown> | Query<unknown> | CollectionReference<unknown>
-    >
-  >,
+  docOrCollectionRef:
+    | MaybeRefOrGetter<
+        _Nullable<
+          | DocumentReference<unknown>
+          | Query<unknown>
+          | CollectionReference<unknown>
+        >
+      >
+    | any,
   localOptions?: _UseFirestoreRefOptions
 ): _RefFirestore<unknown> {
   let unbind: UnbindWithReset = noop
@@ -91,7 +94,7 @@ export function _useFirestoreRef(
     initialSourceValue,
     options.ssrKey,
     NO_INITIAL_VALUE,
-    useFirebaseApp()
+    docOrCollectionRef?.firestore?.app || useFirebaseApp()
   )
 
   const hasInitialValue = initialValue !== NO_INITIAL_VALUE

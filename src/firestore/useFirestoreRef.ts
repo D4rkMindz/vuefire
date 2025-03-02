@@ -94,7 +94,9 @@ export function _useFirestoreRef(
     initialSourceValue,
     options.ssrKey,
     NO_INITIAL_VALUE,
+    /* CUSTOMIZATION START */
     docOrCollectionRef?.firestore?.app || useFirebaseApp()
+    /* CUSTOMIZATION END */
   )
 
   const hasInitialValue = initialValue !== NO_INITIAL_VALUE

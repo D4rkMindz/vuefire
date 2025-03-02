@@ -11,6 +11,24 @@
 </p>
 <br/>
 
+
+BPF: 
+Adjusted: 
+- src/firestore/useFirestoreRef.ts:
+```js
+  // set the initial value from SSR even if the ref comes from outside
+const initialValue = getInitialValue(
+        initialSourceValue,
+        options.ssrKey,
+        NO_INITIAL_VALUE,
+        /* CUSTOMIZATION START */
+        docOrCollectionRef?.firestore?.app || useFirebaseApp()
+        /* CUSTOMIZATION END */
+)
+```
+
+Release: npm run release
+
 > Firebase for Vue made easy!
 
 - Works with Vue >=2.7 and Vue 3

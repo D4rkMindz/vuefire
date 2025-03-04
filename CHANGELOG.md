@@ -1,3 +1,5 @@
+## [0.0.3](https://github.com/vuejs/vuefire/compare/v3.2.1...v0.0.3) (2025-03-04)
+
 ## [3.2.1](https://github.com/vuejs/vuefire/compare/v3.2.1-beta.0...v3.2.1) (2024-12-18)
 
 ### Features

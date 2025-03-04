@@ -260,8 +260,8 @@ declare const devalueCustomStringifiers: {
  * SSR.
  */
 declare const devalueCustomParsers: {
-    TimeStamp: (data: ReturnType<Timestamp["toJSON"]>) => Timestamp;
-    GeoPoint: (data: ReturnType<GeoPoint["toJSON"]>) => GeoPoint;
+    TimeStamp: (data: ReturnType<Timestamp['toJSON']>) => Timestamp;
+    GeoPoint: (data: ReturnType<GeoPoint['toJSON']>) => GeoPoint;
 };
 
 /**
@@ -538,8 +538,8 @@ declare function _VueFireAuthInit(firebaseApp: FirebaseApp, app: App, initialUse
     readonly refreshToken: string;
     readonly tenantId: string | null;
     delete: () => Promise<void>;
-    getIdToken: (forceRefresh?: boolean) => Promise<string>;
-    getIdTokenResult: (forceRefresh?: boolean) => Promise<firebase_auth.IdTokenResult>;
+    getIdToken: (forceRefresh?: boolean | undefined) => Promise<string>;
+    getIdTokenResult: (forceRefresh?: boolean | undefined) => Promise<firebase_auth.IdTokenResult>;
     reload: () => Promise<void>;
     toJSON: () => object;
     readonly displayName: string | null;
@@ -566,8 +566,8 @@ declare function _VueFireAuthInit(firebaseApp: FirebaseApp, app: App, initialUse
     readonly refreshToken: string;
     readonly tenantId: string | null;
     delete: () => Promise<void>;
-    getIdToken: (forceRefresh?: boolean) => Promise<string>;
-    getIdTokenResult: (forceRefresh?: boolean) => Promise<firebase_auth.IdTokenResult>;
+    getIdToken: (forceRefresh?: boolean | undefined) => Promise<string>;
+    getIdTokenResult: (forceRefresh?: boolean | undefined) => Promise<firebase_auth.IdTokenResult>;
     reload: () => Promise<void>;
     toJSON: () => object;
     readonly displayName: string | null;
